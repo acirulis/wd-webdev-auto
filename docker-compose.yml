@@ -5,8 +5,8 @@
    webserver:
      image: acirulis/wd-webdev-auto
      volumes:
-       - .:/code
-     # command: python3 manage.py runserver 0.0.0.0:8000
+       - ./webroot:/var/www/html
+     #command: service nginx start
      restart: on-failure
      ports:
        - "80:80"
