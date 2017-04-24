@@ -8,8 +8,9 @@
      volumes:
        - ./webroot:/var/www/html
        - ./sites-enabled:/etc/nginx/sites-enabled
-     #command: service nginx start
-     restart: on-failure
+     command: /root/startup.sh
+     # command: ls -la /root
+     # restart: on-failure
      ports:
        - "80:80"
        - "443:443"
