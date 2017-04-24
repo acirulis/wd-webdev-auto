@@ -10,7 +10,6 @@
 
 
 **TODO**
-
 Nginx vhost config ???
 MySQL (percona / mariadb ? ) 
 PHP 7.x

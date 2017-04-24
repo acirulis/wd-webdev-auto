@@ -6,6 +6,14 @@ RUN apt-get update \
 && apt-get install -y vim \
 && apt-get install -y nginx
 
+#lets use seperate command for now to speed up builds
+RUN apt-get install -y php-fpm php-mysql
+
+#RUN service nginx start
+RUN service php7.0-fpm start
+RUN service php7.0-fpm restart
+
+RUN service nginx stop
 
 #Expose http, https, mysql
 EXPOSE 80 443 3306
