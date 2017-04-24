@@ -1,0 +1,16 @@
+ version: '3'
+ services:
+   # db:
+   #   image: postgres
+   webserver:
+     image: acirulis/wd-webdev-auto
+     volumes:
+       - .:/code
+     # command: python3 manage.py runserver 0.0.0.0:8000
+     restart: on-failure
+     ports:
+       - "80:80"
+       - "443:443"
+       - "3306:3306"
+     # depends_on:
+     #   - db

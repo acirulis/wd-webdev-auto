@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-MAINTAINER Andis Cirulis "andis.cirulis@whitedigital.eu"
+LABEL maintainer "andis.cirulis@whitedigital.eu"
 
 #some general stuff
 RUN apt-get update \
