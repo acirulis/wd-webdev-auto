@@ -3,8 +3,8 @@
    # db:
    #   image: postgres
    webserver:
-     # image: acirulis/wd-webdev-auto
-     build: .
+     image: acirulis/wd-webdev-auto
+     # build: .
      volumes:
        - ./webroot:/var/www/html
        - ./sites-enabled:/etc/nginx/sites-enabled
