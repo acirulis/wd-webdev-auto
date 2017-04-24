@@ -20,7 +20,8 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 
 # CMD ["nginx", "-g", "daemon off;"]
 WORKDIR /root
-ADD startup.sh /root/
+ADD startup.sh ./
+RUN chmod a+x startup.sh
 
 CMD ["/bin/bash"]
 #ENTRYPOINT  ["bash"]
