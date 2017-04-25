@@ -1,37 +1,43 @@
 https://serversforhackers.com/video/self-signed-ssl-certificates-for-development
 
-# Generate a new private key
-sudo openssl genrsa -out "/etc/ssl/xip.io/xip.io.key" 2048
+# =1= Generate a new private key
+sudo openssl genrsa -out "wd.local.io.key" 2048
 
-# Generate a CSR using the private key for encryption
-sudo openssl req -new -key "/etc/ssl/xip.io/xip.io.key" -out "/etc/ssl/xip.io/xip.io.csr"
-> Country Name: US
-> State: Connecticut
-> City: New Haven
-> Organization Name: xip.io
+# =2= Generate a CSR using the private key for encryption
+sudo openssl req -new -key "wd.local.io.key" -out "wd.local.io.csr"
+> Country Name: LV
+> State: 
+> City: Riga
+> Organization Name: White Digital
 > Organizational Unit:
-> Common Name: *.xip.io
+> Common Name: *.local.io
 > Email:
 > Password:
 > Company Name:
 
-sudo openssl x509 -req -days 365 \
-    -in "/etc/ssl/xip.io/xip.io.csr" \
-    -signkey "/etc/ssl/xip.io/xip.io.key" \
-    -out "/etc/ssl/xip.io/xip.io.crt"
+# =3= Generate certificate using the private key and CSR
+sudo openssl x509 -req -days 365 -in "wd.local.io.csr" -signkey "wd.local.io.key" -out "wd.local.io.crt"
 
-    server {
+# =4= Configure nginx
+server {
     listen 80:
     listen 443 ssl;
 
     root /var/www;
 
-    server_name 192.168.22.14.xip.io;
+    server_name smth.local.io;
 
-    ssl_certificate      /etc/ssl/xip.io/xip.io.crt;
-    ssl_certificate_key  /etc/ssl/xip.io/xip.io.key;
+    ssl_certificate      /etc/ssl/certs/wd.local.io.crt;
+    ssl_certificate_key  /etc/ssl/certs/wd.local.io.key;
 
     location / {
         try_files $uri $uri/ =404;
     }
 }
+
+
+# =5= Install certificate to Trusted Root Certificates on your client
+
+# =6= Add to yor local hosts file: 
+127.0.0.1 whitedigital.local.io somethingelse.local.io
+

@@ -2,19 +2,18 @@
 
 **Usage instructions**
 
-1) Install Docker
+1) Install docker & docker-compose
 2) Open Console/Terminal
-3) Go to project folder (where docker-compose.yml is located)
-4) type [docker-compose up -d]
+3) git clone https://github.com/acirulis/wd-webdev-auto.git
+3) cd wd-webdev-auto
+4) docker-compose up -d [or] docker-compose up [without -d to see log output]
 
 
 
 **TODO**
+
 Nginx vhost config ???
 MySQL (percona / mariadb ? ) 
-PHP 7.x
 
 XDEBUG
 
-single image ? 
-seperate images ?
