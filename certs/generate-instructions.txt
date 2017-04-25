@@ -1,0 +1,37 @@
+https://serversforhackers.com/video/self-signed-ssl-certificates-for-development
+
+# Generate a new private key
+sudo openssl genrsa -out "/etc/ssl/xip.io/xip.io.key" 2048
+
+# Generate a CSR using the private key for encryption
+sudo openssl req -new -key "/etc/ssl/xip.io/xip.io.key" -out "/etc/ssl/xip.io/xip.io.csr"
+> Country Name: US
+> State: Connecticut
+> City: New Haven
+> Organization Name: xip.io
+> Organizational Unit:
+> Common Name: *.xip.io
+> Email:
+> Password:
+> Company Name:
+
+sudo openssl x509 -req -days 365 \
+    -in "/etc/ssl/xip.io/xip.io.csr" \
+    -signkey "/etc/ssl/xip.io/xip.io.key" \
+    -out "/etc/ssl/xip.io/xip.io.crt"
+
+    server {
+    listen 80:
+    listen 443 ssl;
+
+    root /var/www;
+
+    server_name 192.168.22.14.xip.io;
+
+    ssl_certificate      /etc/ssl/xip.io/xip.io.crt;
+    ssl_certificate_key  /etc/ssl/xip.io/xip.io.key;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
