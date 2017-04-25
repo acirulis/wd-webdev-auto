@@ -15,11 +15,13 @@ $options = array(
 $dbh = new PDO($dsn, $username, $password, $options);
 
 try {
-foreach ($dbh->query('select * from varda_dienas where month = 4') as $row) {
-        print $row['month'] . "\t";
-        print $row['day'] . "\t";
-        print $row['names'] . "\n";
-    }
+	echo '<pre>';
+	foreach ($dbh->query('select * from varda_dienas where month = 4') as $row) {
+		print $row['month'] . "\t";
+		print $row['day'] . "\t";
+		print $row['names'] . "\n";
+	}
+	echo '</pre>';
 } catch (PDOException $e)  {
 	printf('<pre>DB error occured: %s</pre>', $e->getMessage());
 }
