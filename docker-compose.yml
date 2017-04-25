@@ -1,7 +1,13 @@
- version: '3'
- services:
-   # db:
-   #   image: postgres
+version: '3'
+services:
+   db:
+      image: mysql:5.7
+      ports:
+        - "3306:3306"
+      volumes:
+        - dbvolume:/var/lib/mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=toor
    webserver:
      image: acirulis/wd-webdev-auto
      # build: .
@@ -9,11 +15,11 @@
        - ./webroot:/var/www/html
        - ./sites-enabled:/etc/nginx/sites-enabled
      command: /root/startup.sh
-     # command: ls -la /root
      # restart: on-failure
      ports:
        - "80:80"
        - "443:443"
-       - "3306:3306"
-     # depends_on:
-     #   - db
+     depends_on:
+        - db
+volumes:
+  dbvolume:

@@ -7,12 +7,13 @@ RUN apt-get update \
 && apt-get install -y nginx
 
 #lets use seperate command for now to speed up builds
-RUN apt-get install -y php-fpm
+RUN apt-get install -y php-fpm \
+    && apt-get install -y php-mysql php-mbstring php-gd php-bcmath php-zip php-xml php-curl php-intl php-memcached
 
 
 
 # #Expose http, https, mysql
-EXPOSE 80 443 3306
+EXPOSE 80 443
 
 # # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
