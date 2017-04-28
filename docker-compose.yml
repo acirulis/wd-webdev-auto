@@ -17,6 +17,8 @@ services:
        - ./certs:/etc/ssl/certs
      command: /root/startup.sh
      # restart: on-failure
+     environment:
+        - XDEBUG_REMOTE_HOST=10.0.75.1
      ports:
        - "80:80"
        - "443:443"

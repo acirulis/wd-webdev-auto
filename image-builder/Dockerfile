@@ -10,8 +10,8 @@ RUN apt-get update \
 RUN apt-get install -y php-fpm \
     && apt-get install -y php-mysql php-mbstring php-gd php-bcmath php-zip php-xml php-curl php-intl php-memcached
 
-
-# #Expose http, https
+RUN apt-get install -y php-xdebug
+# #Expose http, https, xdebug
 EXPOSE 80 443
 
 # # forward request and error logs to docker log collector
