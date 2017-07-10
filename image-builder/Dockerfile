@@ -27,6 +27,16 @@ RUN chmod a+x /usr/local/bin/setup_gulp.py
 
 ADD php.ini /etc/php/7.0/fpm/php.ini
 
+# Installing composer globally
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+RUN php composer-setup.php
+RUN php -r "unlink('composer-setup.php');"
+RUN mv composer.phar /usr/local/bin/composer
+
+# Installing nodejs and npm 
+RUN apt-get -y install curl
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get -y install nodejs
 
 CMD ["/bin/bash"]
 #ENTRYPOINT  ["bash"]
