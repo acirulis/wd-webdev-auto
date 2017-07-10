@@ -24,5 +24,7 @@ RUN chmod a+x startup.sh
 
 ADD php.ini /etc/php/7.0/fpm/php.ini
 
+RUN update-ca-certificates
+
 CMD ["/bin/bash"]
 #ENTRYPOINT  ["bash"]

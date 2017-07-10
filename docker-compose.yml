@@ -14,7 +14,7 @@ services:
      volumes:
        - ./webroot:/var/www/html
        - ./sites-enabled:/etc/nginx/sites-enabled
-       - ./certs:/etc/ssl/certs
+       - ./certs:/etc/ssl/private
      command: /root/startup.sh
      # restart: on-failure
      environment:
