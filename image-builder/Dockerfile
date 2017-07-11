@@ -22,6 +22,9 @@ WORKDIR /root
 ADD startup.sh ./
 RUN chmod a+x startup.sh
 
+ADD setup_gulp.py /usr/local/bin/
+RUN chmod a+x /usr/local/bin/setup_gulp.py
+
 ADD php.ini /etc/php/7.0/fpm/php.ini
 
 # Installing composer globally
