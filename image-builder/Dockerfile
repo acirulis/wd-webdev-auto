@@ -22,9 +22,6 @@ WORKDIR /root
 ADD startup.sh ./
 RUN chmod a+x startup.sh
 
-ADD setup_gulp.py /usr/local/bin/
-RUN chmod a+x /usr/local/bin/setup_gulp.py
-
 ADD php.ini /etc/php/7.0/fpm/php.ini
 
 # Installing composer globally
@@ -37,6 +34,9 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN apt-get -y install curl
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get -y install nodejs
+WORKDIR /usr/lib/node_modules
+RUN npm install gulp
+
 
 CMD ["/bin/bash"]
 #ENTRYPOINT  ["bash"]
