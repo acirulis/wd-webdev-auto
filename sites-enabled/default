@@ -8,7 +8,7 @@ server {
 	root /var/www/html/web;
 
 
-	server_name kolonna.local.io;
+	server_name _;
 
 	set $yii_bootstrap "index.php";
 	charset utf-8;
