@@ -1,14 +1,14 @@
 
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
+	listen 80;
+	listen [::]:80;
 
 
 	client_max_body_size 32M;
 	root /var/www/html/web;
 
 
-	server_name _;
+	server_name kolonna.local.io;
 
 	set $yii_bootstrap "index.php";
 	charset utf-8;
@@ -35,8 +35,8 @@ server {
             fastcgi_index index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 	        fastcgi_connect_timeout     30s;
-	        fastcgi_read_timeout        30s;
-	        fastcgi_send_timeout        60s;            
+	        fastcgi_read_timeout        120s;
+	        fastcgi_send_timeout        120s;            
             include fastcgi_params;
             include fastcgi.conf;
 	}
@@ -118,23 +118,3 @@ server {
 
 	
 }
-
-
-# Virtual Host configuration for example.com
-#
-# You can move that to a different file under sites-available/ and symlink that
-# to sites-enabled/ to enable it.
-#
-#server {
-#	listen 80;
-#	listen [::]:80;
-#
-#	server_name example.com;
-#
-#	root /var/www/example.com;
-#	index index.html;
-#
-#	location / {
-#		try_files $uri $uri/ =404;
-#	}
-#}

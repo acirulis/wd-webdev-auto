@@ -37,7 +37,7 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN apt-get -y install curl
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get -y install nodejs
-WORKDIR /usr/lib/node_modules
+WORKDIR /usr/lib
 RUN npm install gulp
 
 
