@@ -35,11 +35,11 @@ RUN mv composer.phar /usr/local/bin/composer
 
 # Installing nodejs and npm 
 RUN apt-get -y install curl
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get -y install nodejs
 WORKDIR /usr/lib
 RUN npm install gulp
-
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
 
 CMD ["/bin/bash"]
 #ENTRYPOINT  ["bash"]
