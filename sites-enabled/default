@@ -7,7 +7,7 @@ server {
 	client_max_body_size 32M;
 	root /var/www/html/web;
 
-
+	#sendfile off; # virtualbox + nginx bug
 	server_name _;
 
 	set $yii_bootstrap "index.php";
