@@ -3,7 +3,7 @@ LABEL maintainer "andis.cirulis@whitedigital.eu"
 
 #some general stuff
 RUN apt-get update \
-&& apt-get install -y vim \
+&& apt-get install -y vim git \
 && apt-get install -y nginx
 
 #lets use seperate command for now to speed up builds
