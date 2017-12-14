@@ -1,24 +1,33 @@
-https://serversforhackers.com/video/self-signed-ssl-certificates-for-development
 
-# =1= Generate a new private key
-sudo openssl genrsa -out "wd.local.io.key" 2048
+FROM: https://benohead.com/generating-new-certificate-xampp-windows/
 
-# =2= Generate a CSR using the private key for encryption
-sudo openssl req -new -key "wd.local.io.key" -out "wd.local.io.csr"
+1. Modify openssl.cfg file at v3_ca section: 
+
+[ alternate_names ]
+DNS.1        = *.local.io
+
+[ v3_ca ]
+subjectAltName      = @alternate_names
+
+
+2. Generate key & crt files:
+
+$ openssl req -nodes -new -x509 -keyout whitedigital.local.key -out whitedigital.local.crt
+
+Use following settings: 
+
 > Country Name: LV
 > State: 
 > City: Riga
-> Organization Name: White Digital
+> Organization Name: White Digital SIA
 > Organizational Unit:
 > Common Name: *.local.io
 > Email:
-> Password:
 > Company Name:
 
-# =3= Generate certificate using the private key and CSR
-sudo openssl x509 -req -days 365 -in "wd.local.io.csr" -signkey "wd.local.io.key" -out "wd.local.io.crt"
 
-# =4= Configure nginx
+
+# =3= Configure nginx
 server {
     listen 80:
     listen 443 ssl;
@@ -27,8 +36,8 @@ server {
 
     server_name smth.local.io;
 
-    ssl_certificate      /etc/ssl/certs/wd.local.io.crt;
-    ssl_certificate_key  /etc/ssl/certs/wd.local.io.key;
+    ssl_certificate      /etc/ssl/certs/whitedigital.local.crt;
+    ssl_certificate_key  /etc/ssl/certs/whitedigital.local.key;
 
     location / {
         try_files $uri $uri/ =404;
@@ -36,8 +45,8 @@ server {
 }
 
 
-# =5= Install certificate to Trusted Root Certificates on your client
+# =4= Install certificate to Trusted Root Certificates on your client (Local machine)
 
-# =6= Add to yor local hosts file: 
+# =5= Add to yor local hosts file: 
 127.0.0.1 whitedigital.local.io somethingelse.local.io
 
