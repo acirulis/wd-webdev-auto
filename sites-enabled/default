@@ -93,7 +93,7 @@ server {
 	ssl_certificate      /etc/ssl/private/whitedigital.local.crt;
     ssl_certificate_key  /etc/ssl/private/whitedigital.local.key;	
 
-	root /var/www/html;
+	root /var/www/html/web;
 
 	# Add index.php to the list if you are using PHP
 	index index.php index.html index.htm;
