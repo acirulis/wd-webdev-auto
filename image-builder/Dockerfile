@@ -2,17 +2,19 @@ FROM ubuntu:latest
 LABEL maintainer "andis.cirulis@whitedigital.eu"
 
 #some general stuff
+#Add YARN repo
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+#update & install stuff
 RUN apt-get update \
-&& apt-get install -y vim git \
-&& apt-get install -y nginx
+&& apt-get install -y vim git yarn nginx bzip2
 
 #lets use seperate command for now to speed up builds
 RUN apt-get install -y php-fpm \
     && apt-get install -y php-mysql php-mbstring php-gd php-bcmath php-zip php-xml php-curl php-intl php-memcached
 
 RUN apt-get install -y php-xdebug
-# #Install bzip2 for phantomjs
-RUN apt-get install -y bzip2
 # #Expose http, https, xdebug
 EXPOSE 80 443
 
@@ -40,7 +42,7 @@ RUN apt-get -y install curl
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get -y install nodejs
 WORKDIR /usr/lib
-RUN npm install gulp
+RUN yarn install gulp
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
 
 CMD ["/bin/bash"]
