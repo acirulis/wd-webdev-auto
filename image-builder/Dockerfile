@@ -3,12 +3,13 @@ LABEL maintainer "andis.cirulis@whitedigital.eu"
 
 #some general stuff
 #Add YARN repo
+RUN apt update && apt -y install curl apt-transport-https
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 #update & install stuff
-RUN apt-get update \
-&& apt-get install -y vim git yarn nginx bzip2
+RUN apt update && apt upgrade -y \
+&& apt install -y vim git yarn nginx bzip2
 
 #lets use seperate command for now to speed up builds
 RUN apt-get install -y php-fpm \
@@ -38,11 +39,10 @@ RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
 
 # Installing nodejs and npm 
-RUN apt-get -y install curl
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get -y install nodejs
 WORKDIR /usr/lib
-RUN yarn install gulp
+RUN yarn add gulp
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
 
 CMD ["/bin/bash"]
