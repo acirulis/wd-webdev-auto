@@ -11,6 +11,8 @@ RUN apt-get install -y php-fpm \
     && apt-get install -y php-mysql php-mbstring php-gd php-bcmath php-zip php-xml php-curl php-intl php-memcached
 
 RUN apt-get install -y php-xdebug
+# #Install bzip2 for phantomjs
+RUN apt-get install -y bzip2
 # #Expose http, https, xdebug
 EXPOSE 80 443
 
