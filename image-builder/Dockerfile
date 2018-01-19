@@ -3,9 +3,13 @@ LABEL maintainer "andis.cirulis@whitedigital.eu"
 
 #some general stuff
 #Add YARN repo
-RUN apt update && apt -y install curl apt-transport-https language-pack-en-base software-properties-common
+RUN apt update && apt -y install curl apt-transport-https language-pack-en-base software-properties-common tzdata
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+
+#Set correct timezone
+RUN ln -fs /usr/share/zoneinfo/Europe/Riga /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 #Add 7.1 REPO
 RUN locale-gen en_US.UTF-8
@@ -15,7 +19,7 @@ RUN add-apt-repository -y ppa:ondrej/php
 
 #update & install stuff
 RUN apt update && apt upgrade -y \
-&& apt install -y vim git yarn nginx bzip2
+&& apt install -y vim nano git yarn nginx bzip2
 
 #lets use seperate command for now to speed up builds
 RUN apt-get install -y php7.1-fpm \
