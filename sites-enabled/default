@@ -7,7 +7,7 @@ server {
 	client_max_body_size 32M;
 	root /var/www/html/web;
 
-
+	#sendfile off; # virtualbox + nginx bug
 	server_name _;
 
 	set $yii_bootstrap "index.php";
@@ -31,7 +31,7 @@ server {
 
 	location ~ \.php$ {
             try_files $uri =404;
-			fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+			fastcgi_pass unix:/run/php/php7.1-fpm.sock;
             fastcgi_index index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 	        fastcgi_connect_timeout     30s;
@@ -47,7 +47,7 @@ server {
 	# 	fastcgi_split_path_info ^(.+\.php)(/.+)$;
 	# 	fastcgi_index index.php;
 
-	# 	fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+	# 	fastcgi_pass unix:/run/php/php7.1-fpm.sock;
 
 
  #        fastcgi_connect_timeout     30s;
@@ -93,7 +93,7 @@ server {
 	ssl_certificate      /etc/ssl/private/whitedigital.local.crt;
     ssl_certificate_key  /etc/ssl/private/whitedigital.local.key;	
 
-	root /var/www/html;
+	root /var/www/html/web;
 
 	# Add index.php to the list if you are using PHP
 	index index.php index.html index.htm;
@@ -108,7 +108,7 @@ server {
 
 	location ~ \.php$ {
         include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        fastcgi_pass unix:/run/php/php7.1-fpm.sock;
 
     }
 
