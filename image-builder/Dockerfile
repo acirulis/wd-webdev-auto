@@ -11,7 +11,7 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 #Set correct timezone
 RUN ln -fs /usr/share/zoneinfo/Europe/Riga /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
-#Add 7.1 REPO
+#Add 7.2 REPO
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
@@ -22,10 +22,10 @@ RUN apt update && apt upgrade -y \
 && apt install -y vim nano git yarn nginx bzip2
 
 #lets use seperate command for now to speed up builds
-RUN apt-get install -y php7.1-fpm \
-    && apt-get install -y php7.1-mysql php7.1-mbstring php7.1-gd php7.1-bcmath php7.1-zip php7.1-xml php7.1-curl php7.1-intl php7.1-memcached
+RUN apt-get install -y php7.2-fpm \
+    && apt-get install -y php7.2-mysql php7.2-mbstring php7.2-gd php7.2-bcmath php7.2-zip php7.2-xml php7.2-curl php7.2-intl php7.2-memcached
 
-RUN apt-get install -y php7.1-xdebug
+RUN apt-get install -y php7.2-xdebug
 # #Expose http, https, xdebug
 EXPOSE 80 443
 
@@ -40,7 +40,7 @@ RUN chmod a+x startup.sh
 ADD setup_gulp.py /usr/local/bin/
 RUN chmod a+x /usr/local/bin/setup_gulp.py
 
-ADD php.ini /etc/php/7.1/fpm/php.ini
+ADD php.ini /etc/php/7.2/fpm/php.ini
 
 # Installing composer globally
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
