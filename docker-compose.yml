@@ -9,11 +9,11 @@ services:
       environment:
         - MYSQL_ROOT_PASSWORD=toor
    webserver:
-     image: acirulis/wd-webdev-auto
+     image: acirulis/wd-webdev-auto:php5.6-apache  
      # build: .
      volumes:
        - ./webroot:/var/www/html
-       - ./sites-enabled:/etc/nginx/sites-enabled
+       - ./sites-enabled:/etc/apache2/sites-enabled
        - ./certs:/etc/ssl/private
      command: /root/startup.sh
      # restart: on-failure
