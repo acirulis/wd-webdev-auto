@@ -7,11 +7,12 @@ RUN apt update && apt -y install curl apt-transport-https language-pack-en-base 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
-#Add 7.2 REPO
+#Set locale
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
-RUN add-apt-repository -y ppa:ondrej/php
+
+#RUN add-apt-repository -y ppa:ondrej/php
 
 #Set correct timezone
 RUN ln -fs /usr/share/zoneinfo/Europe/Riga /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
