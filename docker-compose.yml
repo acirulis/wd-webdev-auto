@@ -8,6 +8,7 @@ services:
         - dbvolume:/var/lib/mysql
       environment:
         - MYSQL_ROOT_PASSWORD=toor
+      container_name: wd-mysql
    webserver:
      image: acirulis/wd-webdev-auto
      # build: .
@@ -26,5 +27,6 @@ services:
        - "443:443"
      depends_on:
         - db
+     container_name: wd-nginx
 volumes:
   dbvolume:
