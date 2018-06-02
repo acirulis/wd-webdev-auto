@@ -2,8 +2,8 @@ FROM ubuntu:latest
 LABEL maintainer "andis.cirulis@whitedigital.eu"
 
 #some general stuff
-#Add YARN repo
 RUN apt update && apt -y install curl apt-transport-https language-pack-en-base software-properties-common tzdata
+#Add YARN repo
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
@@ -51,11 +51,15 @@ RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
 
 # Installing nodejs and npm 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get -y install nodejs
-WORKDIR /usr/lib
-RUN yarn global add gulp
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+# RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+# RUN apt-get -y install nodejs
+# WORKDIR /usr/lib
+# RUN yarn global add gulp
+# RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+#Install NodeJs & NPM - NEW
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt install -y nodejs
+RUN npm install npm --global
 
 CMD ["/bin/bash"]
 #ENTRYPOINT  ["bash"]
