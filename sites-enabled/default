@@ -23,11 +23,10 @@ server {
 
 	server_name test.local.io;
 
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
-	}
+	set $yii_bootstrap "index.php"; 
+	location / { 
+	    try_files $uri $uri/ /$yii_bootstrap?$args; 
+	} 
 
 	location ~ \.php$ {
         include snippets/fastcgi-php.conf;
