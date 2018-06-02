@@ -1,6 +1,6 @@
 version: '2'
 services:
-   db:
+   db55:
       image: mysql:5.5
       ports:
         - "3306:3306"
@@ -24,6 +24,6 @@ services:
        - "80:80"
        - "443:443"
      depends_on:
-        - db
+        - db55
 volumes:
   dbvolume:
