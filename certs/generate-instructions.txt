@@ -12,7 +12,7 @@ subjectAltName      = @alternate_names
 
 2. Generate key & crt files:
 
-$ openssl req -nodes -new -x509 -keyout whitedigital.local.key -out whitedigital.local.crt
+$ openssl req -nodes -new -sha256 -days 730 -x509 -keyout whitedigital.local.key -out whitedigital.local.crt
 
 Use following settings: 
 
