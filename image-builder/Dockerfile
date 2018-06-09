@@ -46,7 +46,7 @@ RUN chmod a+x startup.sh
 ADD setup_gulp.py /usr/local/bin/
 RUN chmod a+x /usr/local/bin/setup_gulp.py
 
-ADD php.ini /etc/php//apache2/php.ini
+ADD php.ini /etc/php/7.2/apache2/php.ini
 
 # Installing composer globally
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
