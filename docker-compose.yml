@@ -11,7 +11,7 @@ services:
         - MYSQL_ROOT_PASSWORD=toor
    webserver:
      container_name: wd-apache
-     image: acirulis/wd-webdev-auto:php5.6-apache  
+     image: acirulis/wd-webdev-auto:php-apache  
      # build: .
      volumes:
        - ./webroot:/var/www/html
