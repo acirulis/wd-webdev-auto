@@ -1,14 +1,16 @@
 version: '2'
 services:
-   db55:
+   db:
+      container_name: wd-mysql55
       image: mysql:5.5
       ports:
         - "3306:3306"
       volumes:
-        - dbvolume:/var/lib/mysql
+        - dbvolume55:/var/lib/mysql
       environment:
         - MYSQL_ROOT_PASSWORD=toor
    webserver:
+     container_name: wd-apache
      image: acirulis/wd-webdev-auto:php5.6-apache  
      # build: .
      volumes:
@@ -24,6 +26,6 @@ services:
        - "80:80"
        - "443:443"
      depends_on:
-        - db55
+        - db
 volumes:
-  dbvolume:
+  dbvolume55:
