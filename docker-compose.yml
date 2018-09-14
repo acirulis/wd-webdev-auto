@@ -1,12 +1,12 @@
 version: '2'
 services:
    db:
-      container_name: wd-mysql55
-      image: mysql:5.5
+      container_name: wd-mysql
+      image: percona:5.7
       ports:
         - "3306:3306"
       volumes:
-        - dbvolume55:/var/lib/mysql
+        - percona57:/var/lib/mysql
       environment:
         - MYSQL_ROOT_PASSWORD=toor
    webserver:
@@ -28,4 +28,4 @@ services:
      depends_on:
         - db
 volumes:
-  dbvolume55:
+  percona57:
