@@ -1,14 +1,15 @@
 version: '2'
 services:
    db:
-      image: mysql:5.7
+      image: percona:5.7
       ports:
         - "3306:3306"
       volumes:
-        - dbvolume:/var/lib/mysql
+        - percona57:/var/lib/mysql
       environment:
         - MYSQL_ROOT_PASSWORD=toor
       container_name: wd-mysql
+      command: --default-time-zone="Europe/Riga"
    webserver:
      image: acirulis/wd-webdev-auto
      # build: .
@@ -29,4 +30,4 @@ services:
         - db
      container_name: wd-nginx
 volumes:
-  dbvolume:
+  percona57:
