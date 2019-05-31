@@ -12,7 +12,7 @@ RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-#RUN add-apt-repository -y ppa:ondrej/php
+RUN add-apt-repository -y ppa:ondrej/php
 
 #Set correct timezone
 RUN ln -fs /usr/share/zoneinfo/Europe/Riga /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
@@ -22,11 +22,11 @@ RUN apt update && apt upgrade -y \
 && apt install -y vim nano git yarn nginx bzip2
 
 #PHP
-RUN apt-get install -y php7.2-fpm \
-    && apt-get install -y php7.2-mysql php7.2-mbstring php7.2-gd php7.2-bcmath php7.2-zip php7.2-xml php7.2-curl php7.2-intl php7.2-memcached php7.2-imap
+RUN apt-get install -y php7.3-fpm \
+    && apt-get install -y php7.3-mysql php7.3-mbstring php7.3-gd php7.3-bcmath php7.3-zip php7.3-xml php7.3-curl php7.3-intl php7.3-memcached php7.3-imap
 
 #DEBUG
-RUN apt-get install -y php7.2-xdebug
+RUN apt-get install -y php7.3-xdebug
 # #Expose http, https, xdebug
 EXPOSE 80 443
 
@@ -42,13 +42,14 @@ RUN chmod a+x startup.sh
 ##ADD setup_gulp.py /usr/local/bin/
 #RUN chmod a+x /usr/local/bin/setup_gulp.py
 
-ADD php.ini /etc/php/7.2/fpm/php.ini
+ADD php.ini /etc/php/7.3/fpm/php.ini
 
 # Installing composer globally
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
+RUN composer global require hirak/prestissimo
 
 # Installing nodejs and npm 
 # RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
