@@ -37,8 +37,8 @@ WORKDIR /root
 ADD startup.sh ./
 RUN chmod a+x startup.sh
 
-ADD setup_gulp.py /usr/local/bin/
-RUN chmod a+x /usr/local/bin/setup_gulp.py
+# ADD setup_gulp.py /usr/local/bin/
+# RUN chmod a+x /usr/local/bin/setup_gulp.py
 
 ADD php.ini /etc/php/5.6/fpm/php.ini
 
@@ -49,11 +49,9 @@ RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
 
 # Installing nodejs and npm 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get -y install nodejs
-WORKDIR /usr/lib
-RUN yarn global add gulp
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt install -y nodejs
+RUN npm install npm --global
 
 CMD ["/bin/bash"]
 #ENTRYPOINT  ["bash"]
