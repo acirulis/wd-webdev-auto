@@ -2,7 +2,7 @@
 
 **Versions (branches)**
 
-1) PHP 7.2 + NGINX + MYSQL (PERCONA) 5.7 (master)  
+1) PHP 7.3 + NGINX + MYSQL (PERCONA) 5.7 (master)  
 2) PHP 7.2 + APACHE + MYSQL (PERCONA) 5.7 (master)  
 3) PHP 5.6 + NGINX + MYSQL 5.5 (php5.6)  
 4) PHP 5.6 + APACHE + MYSQL 5.5 (php5.6-apache)  
