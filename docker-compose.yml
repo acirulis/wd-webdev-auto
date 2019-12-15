@@ -1,33 +1,30 @@
-version: '2'
+version: '3'
 services:
-   db:
-      image: percona:5.7
-      ports:
-        - "3306:3306"
-      volumes:
-        - percona57:/var/lib/mysql
-      environment:
-        - MYSQL_ROOT_PASSWORD=toor
-      container_name: wd-mysql
-      command: --default-time-zone="Europe/Riga"
-   webserver:
-     image: acirulis/wd-webdev-auto
-     # build: .
-     volumes:
-       - ./webroot:/var/www/html
-       - ./sites-enabled:/etc/nginx/sites-enabled
-       - ./certs:/etc/ssl/private
-     command: /root/startup.sh
-     # restart: on-failure
-     
-     #Uncomment two following lines on linux and append with your host main IP to enable Xdebug
-     #extra_hosts:
-     #   - "host.docker.internal:192.168.1.133"
-     ports:
-       - "80:80"
-       - "443:443"
-     depends_on:
-        - db
-     container_name: wd-nginx
+  db:
+    image: percona:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - percona8:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor
+    container_name: wd-mysql
+    command: --default-authentication-plugin=mysql_native_password
+  webserver:
+    image: acirulis/wd-webdev-auto
+    volumes:
+      - ./webroot:/var/www/html
+      - ./sites-enabled:/etc/nginx/sites-enabled
+      - ./certs:/etc/ssl/private
+    command: /root/startup.sh
+    #Uncomment two following lines on linux and append with your host main IP to enable Xdebug
+    #extra_hosts:
+    #   - "host.docker.internal:192.168.1.133"
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - db
+    container_name: wd-nginx
 volumes:
-  percona57:
+  percona8:

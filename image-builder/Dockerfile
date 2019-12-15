@@ -35,6 +35,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
+RUN composer global require hirak/prestissimo
 
 #Install NodeJs & NPM
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
