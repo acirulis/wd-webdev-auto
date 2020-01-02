@@ -14,7 +14,7 @@ RUN apt update && apt upgrade -y \
 
 #PHP
 RUN apt-get install -y php7.3-fpm \
-    && apt-get install -y php7.3-mysql php7.3-mbstring php7.3-gd php7.3-bcmath php7.3-zip php7.3-xml php7.3-curl php7.3-intl php7.3-memcached php7.3-imap
+    && apt-get install -y php7.3-mysql php7.3-mbstring php7.3-gd php7.3-bcmath php7.3-zip php7.3-xml php7.3-curl php7.3-intl php7.3-memcached php7.3-imap php7.3-pgsql
 
 #DEBUG
 RUN apt-get install -y php7.3-xdebug
@@ -38,7 +38,7 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require hirak/prestissimo
 
 #Install NodeJs & NPM
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
 && apt install -y nodejs
 
 # #Expose http, https, xdebug
