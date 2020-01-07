@@ -3,7 +3,7 @@ LABEL maintainer "andis.cirulis@whitedigital.eu"
 
 #some general stuff
 RUN apt update \
-&& apt -y install curl apt-transport-https software-properties-common tzdata unzip cron mariadb-client \
+&& apt -y install curl build-essential apt-transport-https software-properties-common tzdata unzip cron mariadb-client \
 #Set correct timezone
 && ln -fs /usr/share/zoneinfo/Europe/Riga /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
