@@ -10,14 +10,18 @@ RUN apt update \
 
 # update and install utils & Certbot for letsencrypt
 RUN apt update && apt upgrade -y \
-&& apt install -y vim nano git nginx bzip2
+&& apt install -y vim nano git nginx bzip2 wget
+
 
 #PHP
-RUN apt-get install -y php7.3-fpm \
-    && apt-get install -y php7.3-mysql php7.3-mbstring php7.3-gd php7.3-bcmath php7.3-zip php7.3-xml php7.3-curl php7.3-intl php7.3-memcached php7.3-imap php7.3-pgsql
+RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
+&& echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list \
+&& apt update \
+&& apt-get install -y php7.4-fpm \
+    && apt-get install -y php7.4-mysql php7.4-mbstring php7.4-gd php7.4-bcmath php7.4-zip php7.4-xml php7.4-curl php7.4-intl php7.4-memcached php7.4-imap php7.4-pgsql
 
 #DEBUG
-RUN apt-get install -y php7.3-xdebug
+RUN apt-get install -y php7.4-xdebug
 
 # # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
@@ -28,17 +32,16 @@ ADD startup.sh ./
 RUN chmod a+x startup.sh
 
 
-ADD php.ini /etc/php/7.3/fpm/php.ini
+ADD php.ini /etc/php/7.4/fpm/php.ini
 
 # Installing composer globally
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php composer-setup.php
-RUN php -r "unlink('composer-setup.php');"
-RUN mv composer.phar /usr/local/bin/composer
-RUN composer global require hirak/prestissimo
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+&& php composer-setup.php \
+&& php -r "unlink('composer-setup.php');" \
+&& mv composer.phar /usr/local/bin/composer
 
 #Install NodeJs & Yarn
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
 && apt install -y nodejs
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \

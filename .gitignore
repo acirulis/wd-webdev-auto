@@ -1,6 +1,7 @@
-
+.idea
 certs/\.rnd
 
 sites-enabled/espo-crm
 
 sites-enabled/suite-crm
+
